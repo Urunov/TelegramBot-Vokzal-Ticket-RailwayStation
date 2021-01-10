@@ -1,4 +1,7 @@
 package com.urunov.telgbot.cache;
 
-public class UserDataCache {
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserDataCache implements DataCache{
 }
