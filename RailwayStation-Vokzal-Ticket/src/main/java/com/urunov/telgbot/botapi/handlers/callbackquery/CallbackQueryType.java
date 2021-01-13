@@ -4,4 +4,6 @@ public enum CallbackQueryType {
 
     SUBSCRIBE, UNSUBSCRIBE,
     QUERY_PROCESSED;
+
+
 }

@@ -2,6 +2,9 @@ package com.urunov.telgbot.botapi.handlers.menu;
 
 import com.urunov.telgbot.botapi.BotState;
 import com.urunov.telgbot.botapi.handlers.InputMessageHandler;
+import com.urunov.telgbot.service.MainMenuService;
+import com.urunov.telgbot.service.ReplyMessagesService;
+import com.urunov.telgbot.utils.Emojis;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -11,9 +14,9 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 public class HelpMenuHandler implements InputMessageHandler {
 
     private MainMenuService mainMenuService;
-    private ReplyMessageService messageService;
+    private ReplyMessagesService messageService;
 
-    public HelpMenuHandler(MainMenuService mainMenuService, ReplyMessageService messageService) {
+    public HelpMenuHandler(MainMenuService mainMenuService, ReplyMessagesService messageService) {
         this.mainMenuService = mainMenuService;
         this.messageService = messageService;
     }

@@ -2,14 +2,13 @@ package com.urunov.telgbot.service;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 @Service
@@ -29,7 +28,7 @@ public class PingTask {
             connection.connect();
             log.info("Ping {}, OK: response code {}", url.getHost(), connection.getResponseCode());
             connection.disconnect();
-        } catch (MalformedURLException e) {
+        } catch (IOException e) {
             log.error("Ping FAILED");
             e.printStackTrace();
         }

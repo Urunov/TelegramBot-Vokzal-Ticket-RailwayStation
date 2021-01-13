@@ -46,7 +46,7 @@ public class TrainTicketsGetInfoService {
         this.messagesService = messagesService;
     }
 
-    private List<Train> getTrainTicketList(long chatId, int stationDepartCode, int stationArrivalCode, Date dateDepart)
+    public List<Train> getTrainTicketList(long chatId, int stationDepartCode, int stationArrivalCode, Date dateDepart)
     {
         List<Train> trainList;
         String dateDepartStr = dateFormatter.format(dateDepart);
@@ -95,4 +95,6 @@ public class TrainTicketsGetInfoService {
 
         return Collections.singletonMap(parsedRID.get(), passRzdResponse.getHeaders());
     }
+
+
 }

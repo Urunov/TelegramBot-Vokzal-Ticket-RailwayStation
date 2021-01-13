@@ -1,13 +1,15 @@
 package com.urunov.telgbot.repository;
 
-import com.urunov.telgbot.model.UserTicketsSubsctiption;
+import com.urunov.telgbot.model.UserTicketsSubscription;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface UserTicketsSubscriptionMongoRepo extends MongoRepository<UserTicketsSubsctiption, String> {
+@Repository
+public interface UserTicketsSubscriptionMongoRepo extends MongoRepository<UserTicketsSubscription, String> {
 
-    List<UserTicketsSubsctiption> findByChatId(long chatId);
+    List<UserTicketsSubscription> findByChatId(long chatId);
 
-    List<UserTicketsSubsctiption> findByChatIdAndTrainNumberAndDateDepart(long chatId, String trainNumber, String dateDepart);
+    List<UserTicketsSubscription> findByChatIdAndTrainNumberAndDateDepart(long chatId, String trainNumber, String dateDepart);
 }

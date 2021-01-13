@@ -1,5 +1,9 @@
 package com.urunov.telgbot.cache;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -8,7 +12,9 @@ import java.util.stream.Stream;
 *  @athour: Urunov Hamdamboy
 * */
 
-
+@Component
+@Getter
+@Setter
 public class StationDataCache implements StationCache {
 
     private Map<String, Integer> stationCodeCache = new HashMap<>();

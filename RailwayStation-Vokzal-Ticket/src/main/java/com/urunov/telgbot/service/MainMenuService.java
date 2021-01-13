@@ -1,6 +1,5 @@
 package com.urunov.telgbot.service;
 
-import org.checkerframework.checker.units.qual.K;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -14,7 +13,8 @@ import java.util.List;
 public class MainMenuService {
 
     public SendMessage getMainMenuMessage(final long chatId, final String textMessage){
-        final ReplyKeyboardMarkup replyKeyboardMarkup = getMainMenuMessage();
+        //
+        final ReplyKeyboardMarkup replyKeyboardMarkup = getMainMenuKeyboard();
         final SendMessage mainMenuMessage =
                 createMessageWithKeyboard(chatId, textMessage, replyKeyboardMarkup);
 
