@@ -28,7 +28,7 @@ public class TelegramFacade {
         if (update.hasCallbackQuery()) {
             log.info("New callbackQuery from User: {} with data: {}",  update.getCallbackQuery().getFrom().getUserName(),
                     update.getCallbackQuery().getData());
-            return callbackQueryFacade.pro(update.getCallbackQuery());
+            return callbackQueryFacade.processCallbackQuery(update.getCallbackQuery());
         }
 
         Message message = update.getMessage();
@@ -42,7 +42,7 @@ public class TelegramFacade {
 
     private SendMessage handleInputMessage(Message message){
         String inputMsg = message.getText();
-        int userId = message.getFrom.getId();
+        int userId = message.getFrom().getId();
         BotState botState;
         SendMessage replyMessage;
 

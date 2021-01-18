@@ -1,18 +1,17 @@
 package com.urunov.telgbot.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.urunov.telgbot.TelgbotApplication;
+import com.urunov.telgbot.botapi.VakzalTelgramBot;
 import com.urunov.telgbot.model.Train;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.http.HttpHeaders;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -38,12 +37,15 @@ public class TrainTicketsGetInfoService {
     private final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
     private final RestTemplate restTemplate;
     private final ReplyMessagesService messagesService;
-    private final TelgbotApplication telgbotApplication;
+    private final VakzalTelgramBot vakzalTelgramBot;
 
-    public TrainTicketsGetInfoService(RestTemplate restTemplate, ReplyMessagesService messagesService, @Lazy TelgbotApplication telgbotApplication) {
+    public TrainTicketsGetInfoService(String trainInfoRidRequestTemplate, String trainInfoRequestTemplate,
+                                      RestTemplate restTemplate, ReplyMessagesService messagesService, VakzalTelgramBot vakzalTelgramBot) {
+        this.trainInfoRidRequestTemplate = trainInfoRidRequestTemplate;
+        this.trainInfoRequestTemplate = trainInfoRequestTemplate;
         this.restTemplate = restTemplate;
-        this.telgbotApplication = telgbotApplication;
         this.messagesService = messagesService;
+        this.vakzalTelgramBot = vakzalTelgramBot;
     }
 
     public List<Train> getTrainTicketList(long chatId, int stationDepartCode, int stationArrivalCode, Date dateDepart)

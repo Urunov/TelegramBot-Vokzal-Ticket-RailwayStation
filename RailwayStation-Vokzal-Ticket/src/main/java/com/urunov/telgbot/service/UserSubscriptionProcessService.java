@@ -26,12 +26,12 @@ public class UserSubscriptionProcessService {
     private UserTicketsSubscriptionService subscriptionService;
     private TrainTicketsGetInfoService trainTicketsGetInfoService;
     private StationCodeService stationCodeService;
-    private CarsProssingService carsProssingService;
+    private CarsProcessingService carsProssingService;
     private ReplyMessagesService messagesService;
     private TelgbotApplication telgbotApplication;
 
     public UserSubscriptionProcessService(UserTicketsSubscriptionService subscriptionService, TrainTicketsGetInfoService trainTicketsGetInfoService, StationCodeService stationCodeService,
-                                          CarsProssingService carsProssingService, ReplyMessagesService messagesService,
+                                          CarsProcessingService carsProssingService, ReplyMessagesService messagesService,
                                           @Lazy TelgbotApplication telgbotApplication) {
         this.subscriptionService = subscriptionService;
         this.trainTicketsGetInfoService = trainTicketsGetInfoService;
@@ -44,7 +44,7 @@ public class UserSubscriptionProcessService {
     @Scheduled(fixedRateString = "${subscriptions.processPeriod}")
     public void processAllUsersSubscriptions(){
         log.info("Выполняю обработку подписок пользователей / it is processing user subscriptions.");
-        subscriptionService.getAllSubscriptions().forEach(this::processAllUsersSubscriptions);
+        subscriptionService.getAllSubscriptions().forEach(this::processSubscription);
         log.info("Завершил обработку подписок пользователей./ Complied");
 
     }
@@ -53,7 +53,7 @@ public class UserSubscriptionProcessService {
      * если цена изменилась сохраняет последнюю и уведомляет клиента.
      * @return
      */
-    private boolean processSubscription(UserTicketsSubscription subscription){
+    private Date processSubscription(UserTicketsSubscription subscription){
 
         List<Train> actualTrains = getActualTrains(subscription);
 
@@ -159,5 +159,6 @@ public class UserSubscriptionProcessService {
             return dateDepart;
 
         }
-    }
-}
+
+  }
+

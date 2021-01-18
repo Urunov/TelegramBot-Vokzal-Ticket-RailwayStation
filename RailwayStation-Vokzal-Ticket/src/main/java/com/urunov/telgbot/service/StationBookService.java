@@ -1,13 +1,16 @@
 package com.urunov.telgbot.service;
 
+import com.urunov.telgbot.cache.StationsDataCache;
 import com.urunov.telgbot.model.TrainStation;
 import com.urunov.telgbot.utils.Emojis;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,7 +33,7 @@ public class StationBookService {
     public SendMessage processStationNamePart(long chatId, String stationNamePartParam) {
         String searchedStationName = stationNamePartParam.toUpperCase();
 
-        Optional<String> optionalStationName = stationsCache.getStationName(searchedStationName);
+        Optional<String> optionalStationName =stationsCache.getStationName(searchedStationName);
         if (optionalStationName.isPresent()) {
             return messagesService.getReplyMessage(chatId, "reply.stationBook.stationFound", Emojis.SUCCESS_MARK, optionalStationName.get());
         }
@@ -50,3 +53,21 @@ public class StationBookService {
         return messagesService.getReplyMessage(chatId, "reply.stationBook.stationsFound", Emojis.SUCCESS_MARK, stationsList.toString());
 
     }
+
+    private List<TrainStation> sendStationSearchRequest(String stationNamePart)
+    {
+        ResponseEntity<TrainStation[]> response = restTemplate.getForEntity(
+                stationSearchTemplate,
+                TrainStation[].class, stationNamePart);
+        TrainStation[] stations = response.getBody();
+        if(stations==null) {
+            return Collections.emptyList();
+        }
+
+        for(TrainStation station : stations){
+            stationsCache.addStationToCache(station.getStationName(), station.getStationCode());
+        }
+
+        return List.of(stations);
+    }
+}

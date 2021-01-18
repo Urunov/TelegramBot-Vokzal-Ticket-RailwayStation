@@ -51,22 +51,4 @@ public class UserTicketsSubscription {
         this.timeArrival = timeArrival;
         this.subscribedCars = subscribedCars;
     }
-
-//    public UserTicketsSubscription(String id, long chatId, String trainNumber, String trainName, String stationDepart, String stationArrival,
-//                                   String dateDepart, String dateArrival, String timeDepart,
-//                                   String timeArrival, List<Car> subscribedCars) {
-//        this.id = id;
-//        this.chatId = chatId;
-//        this.trainNumber = trainNumber;
-//        this.trainName = trainName;
-//        this.stationDepart = stationDepart;
-//        this.stationArrival = stationArrival;
-//        this.dateDepart = dateDepart;
-//        this.dateArrival = dateArrival;
-//        this.timeDepart = timeDepart;
-//        this.timeArrival = timeArrival;
-//        this.subscribedCars = subscribedCars;
-//    }
-
-
 }

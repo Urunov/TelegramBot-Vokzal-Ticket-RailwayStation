@@ -32,8 +32,8 @@ public class SendTicketsInfoService {
     public void sendTrainTicketsInfo(long chatId, List<Train> trainList){
         for(Train train: trainList){
             StringBuilder carsInfo = new StringBuilder();
-            List<Car> carsWithMinimalPrice = carsProcessingService.filterCarsWithMinimumPrice(train.getAvailableCars());
-            train.setAvailableCars(carsWithMinimalPrice);
+            List<Car> carsWithMinimalPrice = carsProcessingService.filterCarsWithMinimumPrice((List<Car>) train.getAvailableCars());
+            train.setAvailableCars((Car) carsWithMinimalPrice);
 
             for (Car car: carsWithMinimalPrice)
             {

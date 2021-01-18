@@ -1,6 +1,6 @@
 package com.urunov.telgbot.service;
 
-import com.urunov.telgbot.cache.StationDataCache;
+import com.urunov.telgbot.cache.StationsDataCache;
 import com.urunov.telgbot.model.TrainStation;
 import lombok.AccessLevel;
 import lombok.Value;
@@ -16,14 +16,16 @@ import java.util.Optional;
 @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StationCodeService {
-    @Value("${stationcodeservice.requesttemplate}")
+
+    //@Value(staticConstructor = "${stationcodeservice.requesttemplate}")
     private String stationCodeRequestTemplate;
     private RestTemplate restTemplate;
-    private StationDataCache stationCache;
+    private StationsDataCache stationCache;
 
-    public StationCodeService(String stationCodeRequestTemplate, RestTemplate restTemplate) {
+    public StationCodeService(String stationCodeRequestTemplate, RestTemplate restTemplate, StationsDataCache stationCache) {
         this.stationCodeRequestTemplate = stationCodeRequestTemplate;
         this.restTemplate = restTemplate;
+        this.stationCache = stationCache;
     }
 
     public int getStationCode(String stationName){

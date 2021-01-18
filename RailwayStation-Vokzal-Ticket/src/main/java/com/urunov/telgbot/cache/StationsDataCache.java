@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 @Component
 @Getter
 @Setter
-public class StationDataCache implements StationCache {
+public class StationsDataCache implements StationCache {
 
     private Map<String, Integer> stationCodeCache = new HashMap<>();
 

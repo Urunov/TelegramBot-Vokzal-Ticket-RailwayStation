@@ -43,12 +43,7 @@ public class VakzalTelgramBot extends TelegramWebhookBot {
 
         return replyMessageToUser;
     }
-    @Override
-    public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
-        SendMessage replyMessageToUser = telegramFacade.handleUpdate(update);
 
-        return replyMessageToUser;
-    }
 
     public void sendMessage(long chatId, String textMessage) {
         SendMessage sendMessage = new SendMessage();
